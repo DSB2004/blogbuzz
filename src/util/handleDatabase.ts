@@ -5,6 +5,7 @@ export const getConnection = (pool: Pool): Promise<PoolConnection> => {
     return new Promise((resolve, reject) => {
         pool.getConnection((err, connection) => {
             if (err) {
+                console.log(err)
                 reject("CONNECTION_ERROR");
             } else {
                 resolve(connection);
