@@ -1,8 +1,7 @@
 import DATABASE_INSTANCE from "@/lib/db";
 import { getConnection} from "@/util/handleDatabase";
 import { NextRequest} from "next/server";
-import { PoolConnection } from "mysql";
-
+import { PoolConnection } from "mysql2/promise";
 
 export async function GET(request: NextRequest) {
     let connection: PoolConnection | undefined;

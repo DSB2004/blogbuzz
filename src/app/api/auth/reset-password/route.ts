@@ -2,7 +2,7 @@ import DATABASE_INSTANCE from "@/lib/db";
 import { getConnection, executeQuery } from "@/util/handleDatabase";
 import { NextRequest, NextResponse } from "next/server";
 import redis from "@/lib/redis";
-import { PoolConnection } from "mysql";
+import { PoolConnection } from "mysql2/promise";
 import { hashPassword } from "@/util/handleHashing";
 
 const updatePasswordQuery = 'UPDATE AUTH SET PASSWORD=? WHERE EMAIL=?;'; 

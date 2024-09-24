@@ -2,7 +2,7 @@ import DATABASE_INSTANCE from "@/lib/db";
 import { getConnection, executeQuery } from "@/util/handleDatabase";
 import { createToken } from "@/util/handleJwt";
 import { NextRequest, NextResponse } from "next/server";
-import { PoolConnection } from "mysql";
+import { PoolConnection } from "mysql2/promise";
 import { comparePassword } from "@/util/handleHashing";
 
 const loginQuery = 'SELECT * FROM AUTH WHERE EMAIL=?';
