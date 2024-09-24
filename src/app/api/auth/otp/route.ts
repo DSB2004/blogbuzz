@@ -23,7 +23,6 @@ export async function GET(request: NextRequest) {
         const otpSessionContent = await redis.get(`otp-session:${otpSession}`);
 
         if (!otpSessionContent) {
-
             console.log("redis otp session not found")
             return NextResponse.json({ msg: "Session expired" }, { status: 403 });
         }
@@ -32,11 +31,15 @@ export async function GET(request: NextRequest) {
         const orgOtp = otpSessionParsedContent.otp;
         const mode = otpSessionParsedContent.mode;
         const userEmail = otpSessionParsedContent.email;
+        
+
+        // console.log(orgOtp,otp,orgOtp===otp,verifyOtp(otp))  // for dev purpose
+
         if (orgOtp !== otp || !verifyOtp(otp)) {
             console.log("Something went wrong")
             return NextResponse.json({ msg: "OTP has expired or didn't match" }, { status: 401 });
-
         }
+        
         request.cookies.delete('otp-session-id')
         await redis.del(`otp-session:${otpSession}`);
 

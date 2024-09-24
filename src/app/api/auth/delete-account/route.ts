@@ -24,9 +24,8 @@ export async function DELETE(request: NextRequest) {
         connection = await getConnection(DATABASE_INSTANCE);
         await executeQuery(connection, deleteAccountQuery, [userEmail]);
 
-
         let response;
-        response=NextResponse.json({ msg: "User account deleted successfully", redirect: "/" },{status:204})
+        response=NextResponse.json({ msg: "User account deleted successfully", redirect: "/" },{status:410})
         response.cookies.delete('access-token');
         return response;
 
