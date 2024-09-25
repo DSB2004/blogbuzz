@@ -14,6 +14,7 @@ export const decodeToken = async (token: string): Promise<any> => {
     return new Promise((resolve, reject) => {
         jwt.verify(token, JWT_SECRET, (err, decoded) => {
             if (err) {
+                console.log(err)
                 reject(new Error("INVALID_TOKEN"));
             } else {
                 resolve(decoded);
