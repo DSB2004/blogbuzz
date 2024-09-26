@@ -25,14 +25,18 @@ export async function GET(request:NextRequest){
         if(!result || result.length===0){
             return NextResponse.json({ msg: "User not found" });
         }
-        const storageRef = bucket.file(`profile_pics/${result[0]['PROFILE_PIC']}`);
         
         
         result[0]['LINKS']= result[0]['LINKS'].split(",")
-        result[0]['PROFILE_PIC']=( await storageRef.getSignedUrl({
-            action: 'read',
-            expires: Date.now() + 30 * 24 * 60 * 60 * 1000,
-        }))[0];
+        
+        if(result[0]['PROFILE_PIC']!=='none'){
+
+            let storageRef = bucket.file(`${reqEmail}/${reqEmail}`);
+            result[0]['PROFILE_PIC']=( await storageRef.getSignedUrl({
+                action: 'read',
+                expires: Date.now() + 30 * 24 * 60 * 60 * 1000,
+            }))[0];
+        }
 
         return NextResponse.json({msg:"User profile",profile:result[0],owner:user===reqEmail})
         

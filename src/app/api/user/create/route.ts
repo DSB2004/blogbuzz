@@ -14,16 +14,24 @@ export async function PUT(request: NextRequest) {
     let user;
 
     try {
-        bucket = firebaseStorage.bucket();
-        connection = await getConnection(DATABASE_INSTANCE);
         user = await getUser(request);
-
+        
+        
+        if(!user || user===null){
+            return NextResponse.redirect(new URL('/auth/login?error=TOKEN_EXPIRED',request.url))
+            
+        }
+        
         const formData = await request.formData();
         const name = formData.get('name') as string;
         const email = user?.email as string;
         const about = formData.get('about') as string || "";
         const socialLinkRaw = formData.get('social_link') as string || "";
         let social_link;
+        
+        
+        bucket = firebaseStorage.bucket();
+        connection = await getConnection(DATABASE_INSTANCE);
 
         try {
             social_link = JSON.parse(socialLinkRaw);
@@ -43,7 +51,7 @@ export async function PUT(request: NextRequest) {
 
 
         if(file){
-            fileName = `${email}.${file.name.split('.').pop()}`;
+            fileName = `${email}`;
         }
         try{
 
@@ -64,7 +72,7 @@ export async function PUT(request: NextRequest) {
         }
 
         if (file) {
-            const storageRef = bucket.file(`profile_pics/${fileName}`);
+            const storageRef = bucket.file(`${email}/${email}`);
             const stream = storageRef.createWriteStream({
                 metadata: {
                     contentType: file.type,
