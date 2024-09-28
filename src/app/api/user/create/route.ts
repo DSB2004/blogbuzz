@@ -2,11 +2,11 @@ import DATABASE_INSTANCE from '@/lib/db';
 import { firebaseStorage } from '@/lib/firebase';
 import { executeQuery, getConnection } from '@/util/handleDatabase';
 import { getUser } from '@/util/handleUser';
+import {v4} from  'uuid'
 
 import { NextResponse, NextRequest } from 'next/server';
 
-const createUserQuery = 'INSERT INTO USER (NAME, EMAIL, PROFILE_PIC, ABOUT) VALUES (?, ?, ?, ?);';
-const insertSocialLinksQuery = 'INSERT INTO SOCIAL_LINKS (USER_EMAIL,LINK) VALUES ?;';
+const createBlogQuery = 'INSERT INTO BLOG (ID,TITLE,BODY,CREATED_BY,IMG) VALUES (? , ?, ?, ?, ?);';
 
 export async function PUT(request: NextRequest) {
     let bucket; 
@@ -21,58 +21,36 @@ export async function PUT(request: NextRequest) {
             return NextResponse.redirect(new URL('/auth/login?error=TOKEN_EXPIRED',request.url))
             
         }
-        
         const formData = await request.formData();
-        const name = formData.get('name') as string;
-        const email = user?.email as string;
-        const about = formData.get('about') as string || "";
-        const socialLinkRaw = formData.get('social_link') as string || "";
-        let social_link;
+
+
+        const blog_id=v4()
+        const title= formData.get('title') as string;
+        const created_by = user?.email as string;
+        const body = formData.get('body') as string || "";
+       
         
         
         bucket = firebaseStorage.bucket();
         connection = await getConnection(DATABASE_INSTANCE);
 
-        try {
-            social_link = JSON.parse(socialLinkRaw);
-        } catch (error) {
-            console.error('Invalid JSON for social_link:', error);
-            return NextResponse.json({ msg: "Invalid social link format" }, { status: 400 });
-        }
+        const file = formData.get('img') as File;
 
-        const file = formData.get('profile_pic') as File;
-
-        if (!name || !email) {
+        if (!title|| !body) {
             return NextResponse.json({ msg: "Field not found" }, { status: 400 });
         }
 
         await connection.beginTransaction();
         let fileName =  "none";
 
-
         if(file){
-            fileName = `${email}`;
+            fileName = `${blog_id}`;
         }
-        try{
-
-            await executeQuery(connection, createUserQuery, [name, email, fileName, about]);
-        }catch(err){
-           
-            // @ts-ignore
-            if(err.message==='ERR_DUPLICATE_VALUE'){
-                return NextResponse.json({ msg: "User account exist" }, { status: 400 });
-  
-            }
-        }
-
-        if (social_link && social_link.length > 0) {
-            // @ts-ignore
-            const social_link_array = social_link.map(ele => [email, ele]);
-            await executeQuery(connection, insertSocialLinksQuery, [social_link_array]);
-        }
-
+            
+        await executeQuery(connection, createBlogQuery, [blog_id,title, body, created_by,fileName]);
+      
         if (file) {
-            const storageRef = bucket.file(`${email}/${email}`);
+            const storageRef = bucket.file(`${created_by}/${blog_id}`);
             const stream = storageRef.createWriteStream({
                 metadata: {
                     contentType: file.type,
@@ -87,10 +65,8 @@ export async function PUT(request: NextRequest) {
             });
         }
 
-
-
         await connection.commit();
-        return NextResponse.json({ msg: "User account created" }, { status: 200 });
+        return NextResponse.json({ msg: "Blog created" }, { status: 201 });
     
     } catch (err) {
         console.error('Error occurred:', err);
