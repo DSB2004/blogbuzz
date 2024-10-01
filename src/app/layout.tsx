@@ -24,12 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html data-theme="cupcake">
-      <body
-        className={``}
-      >
-        {children}
-      </body>
+    <html>
+      <body className={`min-h-screen relative`}>{children}</body>
     </html>
   );
 }
