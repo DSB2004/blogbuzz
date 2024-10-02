@@ -8,27 +8,26 @@ const config: Config = {
   ],
   plugins: [
     require("daisyui"),
-    // @ts-ignore
-    function ({ addUtilities }) {
-      const newUtilities = {
-        ".text-shadow-sm": {
-          textShadow: "1px 1px 2px rgba(0, 0, 0, 0.25)",
-        },
-        ".text-shadow": {
-          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
-        },
-        ".text-shadow-lg": {
-          textShadow: "3px 3px 6px rgba(0, 0, 0, 0.4)",
-        },
-      };
-      addUtilities(newUtilities);
-    },
   ],
   daisyui: {
-    themes: ["cupcake"], // Add cupcake theme
+    themes: ["light"],
   },
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        slider: {
+          '0%': { transform: 'translateX(100%)' },  // Start off-screen (right)
+          '10%': { transform: 'translateX(0)' },    // Slide in (500ms)
+          '90%': { transform: 'translateX(0)' },    // Stay in place (visible for 2 seconds)
+          '100%': { transform: 'translateX(100%)' },// Slide out (500ms)
+        },
+
+      },
+      animation: {
+        slider: 'slider 3500ms linear forwards',
+
+      },
+    },
   },
 };
 

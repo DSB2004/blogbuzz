@@ -1,13 +1,14 @@
-import React, { FC, ReactNode } from "react";
-
-interface IPROPS {
+import React, { AnchorHTMLAttributes, FC, ReactNode } from "react";
+import Link from "next/link";
+interface IPROPS extends AnchorHTMLAttributes<HTMLAnchorElement> {
   children: ReactNode;
+  href: string
 }
 
-const NavList: FC<IPROPS> = ({ children }) => {
+const NavList: FC<IPROPS> = ({ children, href }) => {
   return (
     <>
-      <li className="font-bold text-xs mx-4">{children}</li>
+      <Link href={href} className="font-bold text-sm mx-4">{children}</Link>
     </>
   );
 };

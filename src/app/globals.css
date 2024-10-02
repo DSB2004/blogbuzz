@@ -8,5 +8,6 @@ body {
   background-color: #fff7e4;
   font-optical-sizing: auto;
   font-style: normal;
+  overflow-x: hidden;
   /* height: 4000px; */
 }

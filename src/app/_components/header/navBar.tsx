@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, FC, useEffect, useState } from "react";
-import Icon from "@/assets/static/icon.png";
+import Icon from "@/assets/img/icon.png";
 import Image from "next/image";
 interface IPROPS {
   children: ReactNode;
@@ -27,13 +27,13 @@ const NavBar: FC<IPROPS> = ({ children }) => {
 
   return (
     <nav
-      className={`sticky flex justify-between items-center align-middle top-0 p-3 transition-all duration-500 ${state}`}
+      className={` z-20 sticky flex justify-between items-center align-middle top-0 p-3 transition-all duration-500 ${state}`}
     >
       <div className="flex justify-between items-center align-middle w-fit">
         <Image className="w-10 h-10" src={Icon} alt="blog-buzz"></Image>
-        <h1 className=" ml-2 font-extrabold text-l">BlogBuzz</h1>
+        <h1 className=" ml-2 font-extrabold text-lg text-l">BlogBuzz</h1>
       </div>
-      <div className="flex justify-evenly list-none w-fit">{children}</div>
+      <div className="flex justify-evenly items-center list-none w-fit">{children}</div>
     </nav>
   );
 };
