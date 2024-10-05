@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import DATABASE_INSTANCE from "@/lib/db";
 import { getConnection, executeQuery } from "@/util/handleDatabase";
 import { getUser } from "@/util/handleUser";
@@ -25,6 +26,10 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ msg: "User found", user: res[0] });
   } catch (err) {
+    console.error("Error:", err);
+    return new Response(JSON.stringify({ msg: "Internal Server Error" }), {
+      status: 500,
+    });
   } finally {
     connection?.release();
   }

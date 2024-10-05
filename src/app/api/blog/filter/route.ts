@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import DATABASE_INSTANCE from "@/lib/db";
 import { executeQuery, getConnection } from "@/util/handleDatabase";
 import { getUser } from "@/util/handleUser";
