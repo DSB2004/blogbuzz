@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import ErrorProvider from "./_context/useError.context";
-
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "BlogBuzz",

@@ -1,6 +1,6 @@
 "use client"
-import React, { useContext, createContext, FC, ReactNode, useState } from "react";
-import Alert from "../_components/alert/alert";
+import React, { useContext, createContext, FC, ReactNode, useState, useEffect } from "react";
+// import Alert from "../_components/alert/alert";
 import { MdErrorOutline } from 'react-icons/md';
 import { IoCheckmarkDoneCircleSharp } from 'react-icons/io5';
 
@@ -19,7 +19,8 @@ const ErrorContext = createContext<ErrorContextType | null>(null)
 
 
 const ErrorProvider: FC<{ children: ReactNode }> = ({ children }) => {
-    const errorMap: { [key: string]: ErrorInfo } = {
+
+    const alertMap: { [key: string]: ErrorInfo } = {
         SUCCESS: {
             background: 'bg-green-600',
             icon: <IoCheckmarkDoneCircleSharp className='w-6 h-6' />,
@@ -31,15 +32,51 @@ const ErrorProvider: FC<{ children: ReactNode }> = ({ children }) => {
     };
 
     const [alertState, setAlertState] = useState<{ background: string, icon: ReactNode, msg: string } | null>(null);
+
     const showError = (type: string, msg: string) => {
-        setAlertState({ ...errorMap[type], msg })
+        setAlertState({ ...alertMap[type], msg })
     }
+
+
+    useEffect(() => {
+        let errorInterval = null;
+        if (alertState) {
+            errorInterval = setTimeout(() => {
+                setAlertState(null)
+            }, 3500)
+        }
+        return () => {
+            errorInterval ? clearTimeout(errorInterval) : null
+        }
+    }, [alertState])
+
+
+
+
 
     return (
 
         <>
             <ErrorContext.Provider value={{ alertState, showError }}>
-                <Alert />
+
+                {
+                    !alertState || alertState === null ?
+                        <></> :
+                        <>
+                            <div
+                                className={`fixed z-50  top-3 right-3 animate-slider shadow-2xl  ${alertState?.background}`}>
+                                <div className={`p-3 min-w-80  `}>
+                                    <p className='text-sm font-normal text-white flex gap-1 items-center'>
+                                        {alertState?.icon}
+                                        {alertState?.msg}
+                                    </p>
+                                </div>
+                            </div >
+                        </>
+
+                }
+
+
                 {children}
             </ErrorContext.Provider>
         </>

@@ -8,12 +8,14 @@ export default function AuthLayout({
 }>) {
     return (
         <>
+
             <NavBar>
                 <NavList href="/">Home</NavList>
                 <NavList href="/auth/register">Register</NavList>
                 <NavList href="/auth/login">Login</NavList>
             </NavBar>
             {children}
+
         </>
     );
 }

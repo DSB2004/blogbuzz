@@ -6,24 +6,7 @@ import React, { ReactNode, useState, useEffect, FC } from 'react';
 const Alert = () => {
     const [alertState, setAlertState] = useState<{ background: string, icon: ReactNode, msg: string } | null>(null);
 
-    useEffect(() => {
-        let errorInterval = null;
-        if (alertState) {
-            errorInterval = setTimeout(() => {
-                setAlertState(null)
-            }, 3500)
-        }
-        return () => {
-            errorInterval ? clearTimeout(errorInterval) : null
-        }
-    }, [alertState])
-
-
-
-    if (!alertState || alertState === null) {
-        return <></>
-    }
-
+  
     return (
 
         <div

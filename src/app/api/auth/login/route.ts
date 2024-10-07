@@ -1,13 +1,18 @@
+
+
 import DATABASE_INSTANCE from "@/lib/db";
 import { getConnection, executeQuery } from "@/util/handleDatabase";
 import { createToken } from "@/util/handleJwt";
 import { NextRequest, NextResponse } from "next/server";
 import { PoolConnection } from "mysql2/promise";
 import { comparePassword } from "@/util/handleHashing";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const loginQuery = 'SELECT * FROM AUTH WHERE EMAIL=?';
 
 export async function POST(request: NextRequest) {
+
     let connection: PoolConnection | undefined;
     try {
         const body = await request.json();
@@ -39,17 +44,16 @@ export async function POST(request: NextRequest) {
 
         const token = await createToken({ email: body.email }, '7d');
 
-        let response;
-        response=NextResponse.json({ msg: "User signed in successfully", redirect: "/dashboard" })
-        response.cookies.set('access-token', "Bearer " + token, {
+        cookies().set('access-token', "Bearer " + token, {
             httpOnly: true,
-            maxAge: 3600 * 24 * 7,
+            maxAge: 3600 * 24 * 7,  // 7 days
             path: '/',
             sameSite: 'strict',
         });
 
-      return response ;
-
+        // redirect(new URL('/dashboard', request.nextUrl))
+        // return NextResponse.json({ msg: "user logged in" })
+        // return NextResponse.redirect(new URL('/dashboard', request.nextUrl))
 
     } catch (error) {
         console.error('Error happended:', error);
@@ -58,6 +62,6 @@ export async function POST(request: NextRequest) {
             { status: 500 }
         );
     } finally {
-    
+
     }
 }

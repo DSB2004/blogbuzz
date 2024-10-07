@@ -8,7 +8,7 @@ interface IPROPS extends AnchorHTMLAttributes<HTMLAnchorElement> {
 const NavList: FC<IPROPS> = ({ children, href }) => {
   return (
     <>
-      <Link href={href} className="font-bold text-sm mx-4">{children}</Link>
+      <Link href={href} className=" text-md mx-4">{children}</Link>
     </>
   );
 };
