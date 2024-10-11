@@ -18,11 +18,11 @@ model User {
   name        String
   workType    String
   profilePic  String
-  socialLinks Link[]    @relation("UserLink")
   blogs       Blog[]    @relation("UserBlog")
-  likes       Like[]    @relation("UserLike")
-  saves       Save[]    @relation("UserSave")
   comments    Comment[] @relation("UserComment")
+  likes       Like[]    @relation("UserLike")
+  socialLinks Link[]    @relation("UserLink")
+  saves       Save[]    @relation("UserSave")
 }
 
 model Link {
@@ -30,6 +30,8 @@ model Link {
   userId String
   link   String
   user   User   @relation("UserLink", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "Link_userId_fkey")
 }
 
 model Blog {
@@ -40,9 +42,11 @@ model Blog {
   createdOn DateTime  @default(now())
   userId    String
   user      User      @relation("UserBlog", fields: [userId], references: [id], onDelete: Cascade)
+  comments  Comment[] @relation("BlogComment")
   likes     Like[]    @relation("BlogLike")
   saves     Save[]    @relation("BlogSave")
-  comments  Comment[] @relation("BlogComment")
+
+  @@index([userId], map: "Blog_userId_fkey")
 }
 
 model Like {
@@ -50,8 +54,11 @@ model Like {
   blogId    String
   userId    String
   createdOn DateTime @default(now())
-  user      User     @relation("UserLike", fields: [userId], references: [id], onDelete: Cascade)
   blog      Blog     @relation("BlogLike", fields: [blogId], references: [id], onDelete: Cascade)
+  user      User     @relation("UserLike", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([blogId], map: "Like_blogId_fkey")
+  @@index([userId], map: "Like_userId_fkey")
 }
 
 model Save {
@@ -59,8 +66,11 @@ model Save {
   blogId    String
   userId    String
   createdOn DateTime @default(now())
-  user      User     @relation("UserSave", fields: [userId], references: [id], onDelete: Cascade)
   blog      Blog     @relation("BlogSave", fields: [blogId], references: [id], onDelete: Cascade)
+  user      User     @relation("UserSave", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([blogId], map: "Save_blogId_fkey")
+  @@index([userId], map: "Save_userId_fkey")
 }
 
 model Comment {
@@ -69,6 +79,9 @@ model Comment {
   createdOn DateTime @default(now())
   blogId    String
   userId    String
-  user      User     @relation("UserComment", fields: [userId], references: [id], onDelete: Cascade)
   blog      Blog     @relation("BlogComment", fields: [blogId], references: [id], onDelete: Cascade)
+  user      User     @relation("UserComment", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([blogId], map: "Comment_blogId_fkey")
+  @@index([userId], map: "Comment_userId_fkey")
 }
