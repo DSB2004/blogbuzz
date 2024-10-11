@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Auth {
+  email    String @id @unique
+  password String
+}
+
+model User {
+  id          String    @id @default(uuid())
+  email       String    @unique
+  name        String
+  workType    String
+  profilePic  String
+  socialLinks Link[]    @relation("UserLink")
+  blogs       Blog[]    @relation("UserBlog")
+  likes       Like[]    @relation("UserLike")
+  saves       Save[]    @relation("UserSave")
+  comments    Comment[] @relation("UserComment")
+}
+
+model Link {
+  id     String @id @default(uuid())
+  userId String
+  link   String
+  user   User   @relation("UserLink", fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Blog {
+  id        String    @id @default(uuid())
+  img       String
+  title     String
+  body      String?
+  createdOn DateTime  @default(now())
+  userId    String
+  user      User      @relation("UserBlog", fields: [userId], references: [id], onDelete: Cascade)
+  likes     Like[]    @relation("BlogLike")
+  saves     Save[]    @relation("BlogSave")
+  comments  Comment[] @relation("BlogComment")
+}
+
+model Like {
+  id        String   @id @default(uuid())
+  blogId    String
+  userId    String
+  createdOn DateTime @default(now())
+  user      User     @relation("UserLike", fields: [userId], references: [id], onDelete: Cascade)
+  blog      Blog     @relation("BlogLike", fields: [blogId], references: [id], onDelete: Cascade)
+}
+
+model Save {
+  id        String   @id @default(uuid())
+  blogId    String
+  userId    String
+  createdOn DateTime @default(now())
+  user      User     @relation("UserSave", fields: [userId], references: [id], onDelete: Cascade)
+  blog      Blog     @relation("BlogSave", fields: [blogId], references: [id], onDelete: Cascade)
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  title     String
+  createdOn DateTime @default(now())
+  blogId    String
+  userId    String
+  user      User     @relation("UserComment", fields: [userId], references: [id], onDelete: Cascade)
+  blog      Blog     @relation("BlogComment", fields: [blogId], references: [id], onDelete: Cascade)
+}

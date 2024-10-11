@@ -2,7 +2,12 @@ import React, { FC, InputHTMLAttributes, useState } from 'react';
 
 import { FaEyeSlash } from "react-icons/fa";
 
-const Input_1: FC<InputHTMLAttributes<HTMLInputElement>> = ({ className, type = 'text', ...props }) => {
+interface IPROPS extends InputHTMLAttributes<HTMLInputElement> {
+    error?: string
+}
+
+
+const Input_1: FC<IPROPS> = ({ className, type = 'text', error, ...props }) => {
 
     const [currentType, setType] = useState<string>(type);
 
@@ -14,11 +19,20 @@ const Input_1: FC<InputHTMLAttributes<HTMLInputElement>> = ({ className, type = 
             setType('text')
         }
     }
+
     return (
         <div className='relative'>
+
+
+            <span className="text-red-600 text-left text-xs absolute r-0 top-0">
+                {
+                    error
+                }
+            </span>
             <input
                 className={`text-base p-1.5 my-3 outline-none min-w-72  border-b-2 border-black border-spacing-2 
                     border-opacity-0 hover:border-opacity-65 transition-all duration-500
+              
                     ${className}`}
                 type={currentType}
                 {...props}

@@ -11,8 +11,8 @@ export default function AuthLayout({
 
             <NavBar>
                 <NavList href="/">Home</NavList>
-                <NavList href="/auth/register">Register</NavList>
-                <NavList href="/auth/login">Login</NavList>
+                <NavList href="/auth/signup">Sign Up</NavList>
+                <NavList href="/auth/login">Log In</NavList>
             </NavBar>
             {children}
 

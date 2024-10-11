@@ -1,24 +1,24 @@
 "use client"
-import React, { useEffect, useState } from "react";
+
+import React, { useEffect, FormEvent, useState } from "react";
 import { useFormState } from "react-dom";
 import { FcGoogle } from "react-icons/fc";
 import Button_2 from "@/app/_components/button/button_2";
 import Button_1 from "@/app/_components/button/button_1";
 import Input_1 from "@/app/_components/input/input_1";
 import { useError } from "../../_context/useError.context"
-import LoginAction from "./actions";
-import Link from "next/link";
+import RegisterAction from "./actions"
 
 export default function page() {
 
   const { showError } = useError();
+
   const [validateError, setError] = useState<
     { email: string | undefined, password: string | undefined } | null>(null)
-  const [state, action] = useFormState(LoginAction, null);
+  const [state, action] = useFormState(RegisterAction, null);
 
 
   useEffect(() => {
-    setError(null);
     // error loop
     if (state) {
       if (state.type === 'VALIDATION' && typeof state.msg !== 'string') {
@@ -30,35 +30,34 @@ export default function page() {
     }
   }, [state])
 
-
   return (<>
 
 
-    <title>Login</title>
+    <title>SignUp</title>
     <main className="fixed top-0 min-h-svh flex items-center justify-center w-full">
 
       <form
-        action={action}
         style={{ boxShadow: "10px 10px 0px  black" }}
+        action={action}
         className="bg-white min-h-96 flex flex-col items-center w-3/12 p-3 min-w-80 my-auto" >
-        <h1 className=" my-5 mb-8 text-3xl font-bold text-center uppercase">Login With BlogBuzz</h1>
+        <h1 className=" my-5 mb-8 text-3xl font-bold text-center uppercase">SignUp With BlogBuzz</h1>
 
-        <Input_1 name="login-email" type="text" placeholder="Enter your email...." error={validateError ? validateError.email : ""} />
+        <Input_1 name="register-email" type="text" placeholder="Enter your email...." error={validateError ? validateError.email : ""} />
 
-        <Input_1 name="login-password" type="password" placeholder="Enter your password...." error={validateError ? validateError.password : ""} />
+        <Input_1 name="register-password" type="password" placeholder="Enter your password...." error={validateError ? validateError.password : ""} />
 
 
         <div className="my-5">
           <Button_1 type="button" className="w-64 ">
             <FcGoogle className=" mr-2 w-6 h-6" />
             SignIn with Google
+
           </Button_1>
         </div>
 
         <Button_2 type="submit" className="w-64">Sumbit Login Info</Button_2>
 
 
-        <Link className="mt-3" href="/auth/forget-password">Forget Password!! Click here</Link>
       </form>
     </main >
   </>)

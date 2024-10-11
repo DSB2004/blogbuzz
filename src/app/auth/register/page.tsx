@@ -1,50 +1,45 @@
 "use client"
-import React, { FormEvent } from "react";
-import { FcGoogle } from "react-icons/fc";
-import Button_1 from "@/app/_components/button/button_1";
-import Input_1 from "@/app/_components/input/input_1";
+import React, { useState, useEffect } from 'react'
+import Button_2 from '@/app/_components/button/button_2'
+import RegisterAction from './actions';
+import { useError } from '@/app/_context/useError.context';
+import { useFormState } from 'react-dom';
 export default function page() {
+    const { showError } = useError();
 
-  const handleLogin = (e: FormEvent) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const [err, action] = useFormState(RegisterAction, null);
 
-    const email = formData.get("login-email");
-    const password = formData.get("login-password");
+    useEffect(() => {
+        if (err && err !== null) {
+            showError('ERROR', err)
+        }
+    }, [err])
 
-    console.log("Email:", email);
-    console.log("Password:", password);
+    return (
+        <>
+            <title>SignUp</title>
+            <main className="fixed top-0 min-h-svh flex items-center justify-center w-full">
 
+                <form
+                    style={{ boxShadow: "10px 10px 0px  black" }}
+                    action={action}
+                    className="bg-white min-h-96 flex flex-col items-center w-3/12 p-3 min-w-80 my-auto" >
+                    <h1 className=" my-5 mb-8 text-3xl font-bold text-center uppercase">New Account</h1>
 
+                    <p className='text-center text-md my-3'>By creating an account, your email and password will be securely stored on our server. Any blogs or content you post will be visible to all users on the platform. Please ensure your posts adhere to our community guidelines</p>
 
-  }
-  return (<>
-    <title>Register with BlogBuzz</title>
-    <main className="fixed top-0 min-h-svh flex items-center justify-center w-full">
+                    <div className='flex justify-between align-center my-4'>
+                        <p className='font-semibold'>Agree to Term and Condition</p>
+                        <input name="accept" type="checkbox" className="checkbox ml-2" />
+                    </div>
+                    <Button_2
+                        type="submit"
+                        className="w-64">
+                        Create New Account
+                    </Button_2>
 
-      <form
-        style={{ boxShadow: "10px 10px 0px  black" }}
-        onSubmit={handleLogin}
-        className="bg-white h-96 flex flex-col items-center w-3/12 p-3 min-w-80 my-auto" >
-        <h1 className=" my-5 mb-8 text-3xl font-bold text-center uppercase">Register With BlogBuzz</h1>
+                </form>
+            </main >
+        </>)
 
-
-        <Input_1 name="register-email" type="text" placeholder="Enter your email...." />
-
-        <Input_1 name="register-password" type="password" placeholder="Enter your password...." />
-
-
-        <div className="my-5">
-          <Button_1 type="button" className="w-64 ">
-            <FcGoogle className=" mr-2 w-6 h-6" />
-            SignUp with Google
-          </Button_1>
-        </div>
-
-        <Button_1 type="submit" className="w-64">Sumbit Account Info</Button_1>
-
-
-      </form>
-    </main >
-  </>)
 }

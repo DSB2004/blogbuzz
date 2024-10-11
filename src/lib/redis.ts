@@ -1,4 +1,5 @@
-import { REDIS_URL } from '@/env';
+import "server-only"
+import { REDIS_URL } from '@/config';
 import Redis from 'ioredis';
 
 const redis = new Redis(REDIS_URL);
