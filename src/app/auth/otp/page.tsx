@@ -1,17 +1,14 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useFormState } from "react-dom";
 import Button_2 from "@/app/_components/button/button_2";
 import Input_1 from "@/app/_components/input/input_1";
 import OTPAction from "./actions";
 import { useError } from "@/app/_context/useError.context";
-import { redirect, useSearchParams } from "next/navigation";
 import Button_1 from "@/app/_components/button/button_1";
 import { useRouter } from "next/navigation";
 export default function page() {
   const router = useRouter();
-  const query = useSearchParams();
-  const user = query.get("user") || "your email";
   const { showError } = useError();
   const [state, action] = useFormState(OTPAction, null);
 
@@ -26,7 +23,7 @@ export default function page() {
       const res = await fetch("/api/resend-otp");
       console.log(res.status);
       if (res.ok) {
-        showError("SUCCESS", `OTP resend to ${user}`);
+        showError("SUCCESS", `OTP resend to your mail`);
       } else if (res.status === 403) {
         router.replace("/auth/login?error=SESSION_EXPIRED");
       } else {
@@ -50,9 +47,7 @@ export default function page() {
           <h1 className=" my-5 mb-6 text-3xl font-bold text-center uppercase">
             Verify your email
           </h1>
-          <p className="text-md mb-2">
-            OTP has been send to <b>{user}</b>
-          </p>
+          <p className="text-md mb-2">OTP has been send to your mail</p>
           <Input_1
             name="otp"
             type="text"
