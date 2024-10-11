@@ -7,13 +7,23 @@ import { useFormState } from 'react-dom';
 export default function page() {
     const { showError } = useError();
 
-    const [err, action] = useFormState(RegisterAction, null);
+    const [state, action] = useFormState(RegisterAction, null);
+
+    const [validateError, setError] = useState<
+        { email: string | undefined, password: string | undefined } | null>(null)
 
     useEffect(() => {
-        if (err && err !== null) {
-            showError('ERROR', err)
+        setError(null);
+        // error loop
+        if (state) {
+            if (state.type === 'VALIDATION' && typeof state.msg !== 'string') {
+                setError(state.msg)
+            }
+            else if (typeof state.msg === 'string') {
+                showError(state.type, state.msg)
+            }
         }
-    }, [err])
+    }, [state])
 
     return (
         <>
