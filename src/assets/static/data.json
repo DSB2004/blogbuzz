@@ -1,0 +1,90 @@
+{
+  "users": [
+    {
+      "id": "8f14e45f-e8e6-40a1-b0d2-4b5f9235b0b1",
+      "email": "user1@example.com",
+      "name": "John Doe",
+      "workType": "Writer",
+      "profilePic": "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.553209589.1728691200&semt=ais_hybrid-rr-similar"
+    },
+    {
+      "id": "5d41402a-bd49-4b2e-bf55-2e085bbd5de8",
+      "email": "user2@example.com",
+      "name": "Jane Smith",
+      "workType": "Developer",
+      "profilePic": "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.553209589.1728691200&semt=ais_hybrid-rr-similar"
+    }
+  ],
+  "blogs": [
+    {
+      "img": "https://budgetstockphoto.com/samples/pics/skyclounds.jpg",
+      "title": "The Beauty of TypeScript",
+      "body": "Exploring the advantages of using TypeScript in modern web development.",
+      "createdOn": "2024-10-12T12:00:00Z",
+      "userId": "8f14e45f-e8e6-40a1-b0d2-4b5f9235b0b1"
+    },
+    {
+      "img": "https://budgetstockphoto.com/samples/pics/skyclounds.jpg",
+      "title": "Next.js for Beginners",
+      "body": "A beginner's guide to building web applications using Next.js.",
+      "createdOn": "2024-10-10T08:30:00Z",
+      "userId": "8f14e45f-e8e6-40a1-b0d2-4b5f9235b0b1"
+    },
+    {
+      "img": "https://budgetstockphoto.com/samples/pics/skyclounds.jpg",
+      "title": "Deploying with Vercel",
+      "body": "How to deploy your Next.js application seamlessly using Vercel.",
+      "createdOn": "2024-10-08T15:45:00Z",
+      "userId": "5d41402a-bd49-4b2e-bf55-2e085bbd5de8"
+    },
+    {
+      "img": "https://budgetstockphoto.com/samples/pics/skyclounds.jpg",
+      "title": "Understanding Prisma",
+      "body": "A deep dive into using Prisma as your database toolkit in modern development.",
+      "createdOn": "2024-10-07T10:15:00Z",
+      "userId": "8f14e45f-e8e6-40a1-b0d2-4b5f9235b0b1"
+    },
+    {
+      "img": "https://budgetstockphoto.com/samples/pics/skyclounds.jpg",
+      "title": "GraphQL with Next.js",
+      "body": "Learn how to integrate GraphQL into your Next.js projects.",
+      "createdOn": "2024-10-06T13:00:00Z",
+      "userId": "5d41402a-bd49-4b2e-bf55-2e085bbd5de8"
+    },
+    {
+      "img": "https://budgetstockphoto.com/samples/pics/skyclounds.jpg",
+      "title": "Effective State Management",
+      "body": "Different approaches to state management in React applications.",
+      "createdOn": "2024-10-05T09:30:00Z",
+      "userId": "8f14e45f-e8e6-40a1-b0d2-4b5f9235b0b1"
+    },
+    {
+      "img": "https://budgetstockphoto.com/samples/pics/skyclounds.jpg",
+      "title": "The Power of Tailwind CSS",
+      "body": "Why Tailwind CSS is a game-changer for frontend developers.",
+      "createdOn": "2024-10-04T11:20:00Z",
+      "userId": "5d41402a-bd49-4b2e-bf55-2e085bbd5de8"
+    },
+    {
+      "img": "https://budgetstockphoto.com/samples/pics/skyclounds.jpg",
+      "title": "Scaling Your Node.js Application",
+      "body": "Tips and tricks for scaling your Node.js apps for high performance.",
+      "createdOn": "2024-10-03T14:00:00Z",
+      "userId": "8f14e45f-e8e6-40a1-b0d2-4b5f9235b0b1"
+    },
+    {
+      "img": "https://budgetstockphoto.com/samples/pics/skyclounds.jpg",
+      "title": "Building RESTful APIs with Express",
+      "body": "How to create powerful and efficient REST APIs using Express.js.",
+      "createdOn": "2024-10-02T17:30:00Z",
+      "userId": "5d41402a-bd49-4b2e-bf55-2e085bbd5de8"
+    },
+    {
+      "img": "https://budgetstockphoto.com/samples/pics/skyclounds.jpg",
+      "title": "Introduction to WebAssembly",
+      "body": "A beginner's guide to understanding and using WebAssembly.",
+      "createdOn": "2024-10-01T19:15:00Z",
+      "userId": "8f14e45f-e8e6-40a1-b0d2-4b5f9235b0b1"
+    }
+  ]
+}

@@ -65,22 +65,21 @@ export default function page() {
             Forget Password!! Click here
           </Link>
 
-          <div className="divider">OR</div>
+          <div className="divider text-inherit">OR</div>
           <div className="flex justify-center align-middle">
-            <Button_1
-              type="button"
-              className="my-3 px-0  h-12 w-12 rounded-full mx-2"
+            <div
+              style={{ background: "black" }}
+              className="my-3 px-0 h-12 w-12  rounded-full mx-2 flex align-middle justify-center items-center"
             >
-              <BsGoogle className="h-6 w-6" />
-            </Button_1>
-            <Button_1
-              type="button"
-              className="my-3 px-0 h-12 w-12 rounded-full mx-2"
+              <BsGoogle className="h-6 w-6 fill-white" />
+            </div>
+            <div
+              style={{ background: "black" }}
+              className="my-3 px-0 h-12 w-12 rounded-full mx-2 flex align-middle justify-center items-center"
             >
-              <VscGithubInverted className="h-6 w-6" />
-            </Button_1>
+              <VscGithubInverted className="h-6 w-6 fill-white" />
+            </div>
           </div>
-
         </form>
       </main>
     </>

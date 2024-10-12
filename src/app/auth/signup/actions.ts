@@ -13,8 +13,10 @@ import { RedirectType } from "next/navigation";
 export default async function SignUpAction(state: any, formData: FormData) {
   let email = formData.get("register-email") as string;
   let password = formData.get("register-password") as string;
+  let name = formData.get("register-name") as string;
 
   const validate = ValidateAuth.safeParse({
+    name,
     email,
     password,
   });
@@ -55,7 +57,7 @@ export default async function SignUpAction(state: any, formData: FormData) {
     );
     await redis.set(
       `new-user:${new_account_id}`,
-      JSON.stringify({ email: email, password }),
+      JSON.stringify({ email: email, password, name }),
       "EX",
       300
     );

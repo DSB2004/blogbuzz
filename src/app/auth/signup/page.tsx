@@ -38,14 +38,19 @@ export default function page() {
           action={action}
           className="bg-white min-h-96 flex flex-col items-center w-3/12 p-3 min-w-80 my-auto"
         >
-          <h1 className=" my-5 mb-6 text-3xl font-bold text-center uppercase">
+          <h1 className=" my-4 text-3xl font-bold text-center uppercase">
             SignUp With BlogBuzz
           </h1>
 
-          <p className="text-md mb-2">Create a new BlogBuzz Account</p>
-
           <Input_1
             className="mt-4"
+            name="register-name"
+            type="text"
+            placeholder="Enter your name...."
+            error={validateError ? validateError.email : ""}
+          />
+
+          <Input_1
             name="register-email"
             type="text"
             placeholder="Enter your email...."
@@ -59,7 +64,7 @@ export default function page() {
             error={validateError ? validateError.password : ""}
           />
 
-          <Button_2 type="submit" className="mt-4 w-64">
+          <Button_2 type="submit" className="my-4 w-64">
             Create New Account
           </Button_2>
         </form>

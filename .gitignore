@@ -10,6 +10,9 @@
 # production
 /build
 
+# test
+/test
+
 # misc
 .DS_Store
 *migrations

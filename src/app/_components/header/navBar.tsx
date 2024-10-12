@@ -31,9 +31,11 @@ const NavBar: FC<IPROPS> = ({ children }) => {
     >
       <div className="flex justify-between items-center align-middle w-fit">
         <Image className="w-10 h-10" src={Icon} alt="blog-buzz"></Image>
-        <h1 className=" ml-2 font-extrabold text-lg text-l">BlogBuzz</h1>
+        <h1 className=" ml-2 font-bold text-xl text-l">BlogBuzz</h1>
       </div>
-      <div className="flex justify-evenly items-center list-none w-fit">{children}</div>
+      <div className="flex justify-evenly align-middle  items-center list-none w-fit">
+        {children}
+      </div>
     </nav>
   );
 };

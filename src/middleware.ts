@@ -6,21 +6,10 @@ import { getUser } from "./util/user.util";
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Handle dashboard routes
-  if (pathname.startsWith("/dashboard")) {
+  if (pathname === "/") {
     const user = await getUser();
     if (user) {
-      console.log("Current User", user.email);
-    }
-  }
-
-  // Handle API routes for user or blog
-  if (pathname.startsWith("/api/user") || pathname.startsWith("/api/blog")) {
-    const user = await getUser();
-    if (!user && request.method !== "GET") {
-      return NextResponse.redirect(
-        new URL("/auth/login?error=TOKEN_EXPIRED", request.url)
-      );
+      return NextResponse.redirect(new URL("/dashboard", request.url));
     }
   }
 
