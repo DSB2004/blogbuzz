@@ -5,7 +5,7 @@ import redis from "@/lib/redis";
 import { hashPassword } from "@/util/hashing.util";
 import { v4 } from "uuid";
 import { generateOtp } from "@/util/otp.util";
-import { ValidateAuth } from "@/lib/validate";
+import { signUpSchema } from "@/lib/validate";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { RedirectType } from "next/navigation";
@@ -14,11 +14,12 @@ export default async function SignUpAction(state: any, formData: FormData) {
   let email = formData.get("register-email") as string;
   let password = formData.get("register-password") as string;
   let name = formData.get("register-name") as string;
-
-  const validate = ValidateAuth.safeParse({
+  let confirmPassword = formData.get("register-confirm-password") as string;
+  const validate = signUpSchema.safeParse({
     name,
     email,
     password,
+    confirmPassword,
   });
 
   if (validate.error) {

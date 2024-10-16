@@ -1,9 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
-import { FcGoogle } from "react-icons/fc";
 import Button_2 from "@/app/_components/button/button_2";
-import Button_1 from "@/app/_components/button/button_1";
 import Input_1 from "@/app/_components/input/input_1";
 import { useError } from "../../_context/useError.context";
 import ResetPasswordAction from "./actions";
@@ -11,8 +9,8 @@ import ResetPasswordAction from "./actions";
 export default function page() {
   const { showError } = useError();
   const [validateError, setError] = useState<{
-    newPassword: string | undefined;
-    copyPassword: string | undefined;
+    newPassword?: string;
+    confirmPassword?: string;
   } | null>(null);
   const [state, action] = useFormState(ResetPasswordAction, null);
 
@@ -51,10 +49,10 @@ export default function page() {
           />
 
           <Input_1
-            name="copy-password"
+            name="confirm-password"
             type="password"
             placeholder="Re-enter your password...."
-            error={validateError ? validateError.copyPassword : ""}
+            error={validateError ? validateError.confirmPassword : ""}
           />
 
           <Button_2 type="submit" className=" mt-4 w-64">

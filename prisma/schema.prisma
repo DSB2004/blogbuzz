@@ -1,0 +1,166 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Auth {
+  name     String 
+  email    String @id @unique
+  password String
+}
+
+model User {
+  id          String    @id @default(uuid())  
+  email       String    @unique
+  name        String
+  workType    String
+  img         Image[]     @relation("UserImage")
+  blogs       Blog[]    @relation("UserBlog")
+  comments    Comment[] @relation("UserComment")
+  likes       Like[]    @relation("UserLike")
+  socialLinks Link[]    @relation("UserLink")
+  saves       Save[]    @relation("UserSave")
+  follows     Followers[] @relation("Follows")
+  followedBy  Followers[] @relation("Followed")  
+}
+
+model Link {
+  id     String @id @default(uuid())
+  userId String
+  link   String
+  user   User   @relation("UserLink", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "Link_userId_fkey")
+}
+
+model Followers {
+  id         String @id @default(uuid())
+  followerId String 
+  targetId   String 
+  follower   User   @relation("Follows", fields: [followerId], references: [id], onDelete: Cascade)
+  target     User   @relation("Followed", fields: [targetId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, targetId])
+  @@index([followerId], map: "followerId_fkey")
+  @@index([targetId], map: "targetId_fkey")
+}
+
+model Blog {
+  id        String    @id @default(uuid())
+  title     String
+  body      String?
+  createdOn DateTime  @default(now())
+  userId    String
+  imgs      Image[]   @relation("BlogImages")
+  user      User      @relation("UserBlog", fields: [userId], references: [id], onDelete: Cascade)
+  comments  Comment[] @relation("BlogComment")
+  likes     Like[]    @relation("BlogLike")
+  saves     Save[]    @relation("BlogSave")
+  tags      Tag[]     @relation("BlogTag")
+
+  @@index([userId], map: "Blog_userId_fkey") 
+}
+
+model Trending {
+  id        String    @id @default(uuid())
+  title     String
+  body      String?
+  createdOn DateTime  @default(now())
+  imgs      Image[]   @relation("TrendingImages")
+  likes     Like[]    @relation("TrendingLike")
+  saves     Save[]    @relation("TrendingSave")
+  tags      Tag[]     @relation("TrendingTag")
+  comments  Comment[] @relation("TrendingComment")
+}
+
+model Event {  
+  id        String    @id @default(uuid())
+  title     String 
+  body      String?
+  createdOn DateTime  @default(now())
+  imgs      Image[]   @relation("EventImages")  
+  likes     Like[]    @relation("EventLike")
+  saves     Save[]    @relation("EventSave")
+  tags      Tag[]     @relation("EventTag")
+  comments  Comment[] @relation("EventComment")
+}
+
+model Image {
+   id         String    @id @default(uuid())
+   link       String 
+   associateId String  
+   user       User?     @relation("UserImage", fields: [associateId], references: [id], onDelete:Cascade, map: "Image_user_associateId_fkey")
+   blog       Blog?     @relation("BlogImages", fields: [associateId], references: [id], onDelete: Cascade, map: "Image_blog_associateId_fkey") 
+   trending   Trending? @relation("TrendingImages", fields: [associateId], references: [id], onDelete: Cascade, map: "Image_trending_associateId_fkey") 
+   event      Event?    @relation("EventImages", fields: [associateId], references: [id], onDelete: Cascade, map: "Image_event_associateId_fkey")
+
+   @@index([associateId], map: "Image_associateId_fkey") 
+   @@unique([link])  
+}
+
+model Tag {
+  id          String @id @default(uuid())
+  value       String 
+  associateId String  
+  @@unique([associateId, value])
+
+  blog        Blog?     @relation("BlogTag", fields: [associateId], references: [id], onDelete: Cascade, map: "Tag_blog_associateId_fkey") 
+  trending    Trending? @relation("TrendingTag", fields: [associateId], references: [id], onDelete: Cascade, map: "Tag_trending_associateId_fkey") 
+  event       Event?    @relation("EventTag", fields: [associateId], references: [id], onDelete: Cascade, map: "Tag_event_associateId_fkey")
+  
+  @@index([associateId], map: "Tag_associateId_fkey") 
+}
+
+model Like {
+  id          String   @id @default(uuid())
+  userId      String
+  associateId String  
+  user        User     @relation("UserLike", fields: [userId], references: [id], onDelete: Cascade)
+  createdOn   DateTime @default(now())
+
+  blog        Blog?    @relation("BlogLike", fields: [associateId], references: [id], onDelete: Cascade, map: "Like_blog_associateId_fkey")
+  trending    Trending? @relation("TrendingLike", fields: [associateId], references: [id], onDelete: Cascade, map: "Like_trending_associateId_fkey") 
+  event      Event?    @relation("EventLike", fields: [associateId], references: [id], onDelete: Cascade, map: "Like_event_associateId_fkey")
+
+  @@unique([userId, associateId])
+  @@index([associateId], map: "Like_associateId_fkey")
+  @@index([userId], map: "Like_userId_fkey")
+}
+
+model Save {
+  id          String   @id @default(uuid())
+  userId      String
+  associateId String  
+  user        User     @relation("UserSave", fields: [userId], references: [id], onDelete: Cascade)
+  createdOn   DateTime @default(now())
+
+  blog        Blog?    @relation("BlogSave", fields: [associateId], references: [id], onDelete: Cascade, map: "Save_blog_associateId_fkey")
+  trending    Trending? @relation("TrendingSave", fields: [associateId], references: [id], onDelete: Cascade, map: "Save_trending_associateId_fkey") 
+  event      Event?    @relation("EventSave", fields: [associateId], references: [id], onDelete: Cascade, map: "Save_event_associateId_fkey")
+
+  @@unique([userId, associateId])
+  @@index([associateId], map: "Save_associateId_fkey")
+  @@index([userId], map: "Save_userId_fkey")
+}
+
+model Comment {
+  id          String   @id @default(uuid())
+  title       String
+  createdOn   DateTime @default(now())
+  userId      String
+  user        User     @relation("UserComment", fields: [userId], references: [id], onDelete: Cascade)
+  associateId String  
+
+  blog        Blog?    @relation("BlogComment", fields: [associateId], references: [id], onDelete: Cascade, map: "Comment_blog_associateId_fkey")
+  trending    Trending? @relation("TrendingComment", fields: [associateId], references: [id], onDelete: Cascade, map: "Comment_trending_associateId_fkey") 
+  event      Event?    @relation("EventComment", fields: [associateId], references: [id], onDelete: Cascade, map: "Comment_event_associateId_fkey")
+
+  @@unique([userId, associateId])
+
+  @@index([associateId], map: "Comment_associateId_fkey")
+  @@index([userId], map: "Comment_userId_fkey")
+}

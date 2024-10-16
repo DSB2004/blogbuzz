@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import prisma from "@/lib/prisma";
-import { ValidateAuth } from "@/lib/validate";
+import { forgetPasswordSchema } from "@/lib/validate";
 import { v4 } from "uuid";
 import { generateOtp } from "@/util/otp.util";
 import redis from "@/lib/redis";
@@ -16,7 +16,10 @@ export default async function ForgetPasswordAction(
   const email = formdata.get("registered-email") as string;
   try {
     // validating a fake password
-    const validate = ValidateAuth.safeParse({ email, password: "12345678" });
+    const validate = forgetPasswordSchema.safeParse({
+      email,
+      password: "12345678",
+    });
 
     if (validate.error) {
       return {

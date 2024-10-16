@@ -5,18 +5,14 @@ import { comparePassword } from "@/util/hashing.util";
 import { createToken } from "@/util/jwt.util";
 import { cookies } from "next/headers";
 import prisma from "@/lib/prisma";
-import { ValidateAuth } from "@/lib/validate";
+import { loginSchema } from "@/lib/validate";
 
 export default async function LoginAction(state: any, formdata: FormData) {
   try {
     const email = formdata.get("login-email") as string;
     const password = formdata.get("login-password") as string;
 
-    const validate = ValidateAuth.safeParse({
-      name: "john doe",
-      email,
-      password,
-    });
+    const validate = loginSchema.safeParse({ email, password });
 
     if (validate.error) {
       return {

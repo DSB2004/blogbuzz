@@ -30,8 +30,14 @@ const NavBar: FC<IPROPS> = ({ children }) => {
       className={` z-20 sticky flex justify-between items-center align-middle top-0 p-3 transition-all duration-500 ${state}`}
     >
       <div className="flex justify-between items-center align-middle w-fit">
-        <Image className="w-10 h-10" src={Icon} alt="blog-buzz"></Image>
-        <h1 className=" ml-2 font-bold text-xl text-l">BlogBuzz</h1>
+        <Image
+          className="w-8 h-8 md:w-10 md:h-10"
+          src={Icon}
+          alt="blog-buzz"
+        ></Image>
+        <h1 className=" ml-2 font-bold text-lg md:text-xl text-l uppercase">
+          BlogBuzz
+        </h1>
       </div>
       <div className="flex justify-evenly align-middle  items-center list-none w-fit">
         {children}

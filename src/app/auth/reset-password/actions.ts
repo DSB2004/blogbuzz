@@ -4,7 +4,7 @@ import { redirect, RedirectType } from "next/navigation";
 import { hashPassword } from "@/util/hashing.util";
 import { cookies } from "next/headers";
 import prisma from "@/lib/prisma";
-import { ValidateResetPassword } from "@/lib/validate";
+import { resetPasswordSchema } from "@/lib/validate";
 import redis from "@/lib/redis";
 
 export default async function ResetPasswordAction(
@@ -13,7 +13,7 @@ export default async function ResetPasswordAction(
 ) {
   try {
     let newPassword = formdata.get("new-password") as string;
-    const copyPassword = formdata.get("copy-password") as string;
+    const confirmPassword = formdata.get("confirm-password") as string;
     const authSession = cookies().get("auth-session-id")?.value;
     const userEmail = await redis.get(`auth-session-id:${authSession}`);
 
@@ -24,9 +24,9 @@ export default async function ResetPasswordAction(
       };
     }
 
-    const validate = ValidateResetPassword.safeParse({
+    const validate = resetPasswordSchema.safeParse({
       newPassword,
-      copyPassword,
+      confirmPassword,
     });
 
     if (validate.error) {
@@ -34,7 +34,7 @@ export default async function ResetPasswordAction(
         type: "VALIDATION",
         msg: {
           newPassword: validate.error?.format().newPassword?._errors[0],
-          copyPassword: validate.error?.format().copyPassword?._errors[0],
+          copyPassword: validate.error?.format().confirmPassword?._errors[0],
         },
       };
     }

@@ -13,9 +13,12 @@ export default function page() {
   const { showError } = useError();
 
   const [validateError, setError] = useState<{
-    email: string | undefined;
-    password: string | undefined;
+    name?: string;
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
   } | null>(null);
+
   const [state, action] = useFormState(RegisterAction, null);
 
   useEffect(() => {
@@ -47,7 +50,7 @@ export default function page() {
             name="register-name"
             type="text"
             placeholder="Enter your name...."
-            error={validateError ? validateError.email : ""}
+            error={validateError ? validateError.name : ""}
           />
 
           <Input_1
@@ -62,6 +65,13 @@ export default function page() {
             type="password"
             placeholder="Enter your password...."
             error={validateError ? validateError.password : ""}
+          />
+
+          <Input_1
+            name="register-confirm-password"
+            type="password"
+            placeholder="Enter your password...."
+            error={validateError ? validateError.confirmPassword : ""}
           />
 
           <Button_2 type="submit" className="my-4 w-64">

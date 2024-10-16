@@ -23,7 +23,7 @@ const Input_1: FC<IPROPS> = ({ className, type = "text", error, ...props }) => {
         {error}
       </span>
       <input
-        className={`text-base p-1.5 my-3 outline-none min-w-72  border-b-2 border-black border-spacing-2 
+        className={`text-base p-1.5 my-3 outline-none min-w-72 bg-transparent border-b-2 border-black border-spacing-2 
                     border-opacity-0 hover:border-opacity-65 transition-all duration-500
               
                     ${className}`}

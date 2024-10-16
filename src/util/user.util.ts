@@ -17,6 +17,16 @@ export async function getUser(): Promise<{
   return user;
 }
 
+export async function getUserInfo() {
+  let user = await getUser();
+
+  let res = await prisma.user.findFirst({
+    where: { email: user?.email },
+    select: { email: true, name: true, socialLinks: true, workType: true },
+  });
+  return res;
+}
+
 export async function deleteUser() {
   return cookies().delete("access-token");
 }

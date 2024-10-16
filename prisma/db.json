@@ -1,0 +1,216 @@
+{
+  "users": [
+    {
+      "email": "johndoe@exm.com",
+      "name": "John Doe",
+      "workType": "Writer",
+      "profilePic": "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.553209589.1728691200&semt=ais_hybrid-rr-similar"
+    },
+    {
+      "email": "janesmith@exm.com",
+      "name": "Jane Smith",
+      "workType": "Developer",
+      "profilePic": "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.553209589.1728691200&semt=ais_hybrid-rr-similar"
+    }
+  ],
+  "blogs": [
+    {
+      "title": "The Beauty of TypeScript",
+      "body": "Exploring the advantages of using TypeScript in modern web development.",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "title": "Next.js for Beginners",
+      "body": "A beginner's guide to building web applications using Next.js.",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "title": "Deploying with Vercel",
+      "body": "How to deploy your Next.js application seamlessly using Vercel.",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "title": "Understanding Prisma",
+      "body": "A deep dive into using Prisma as your database toolkit in modern development.",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "title": "GraphQL with Next.js",
+      "body": "Learn how to integrate GraphQL into your Next.js projects.",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "title": "Effective State Management",
+      "body": "Different approaches to state management in React applications.",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "title": "The Power of Tailwind CSS",
+      "body": "Why Tailwind CSS is a game-changer for frontend developers.",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "title": "Scaling Your Node.js Application",
+      "body": "Tips and tricks for scaling your Node.js apps for high performance.",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "title": "Building RESTful APIs with Express",
+      "body": "How to create powerful and efficient REST API",
+      "userId": "9c192b41-d504-48d8-8264-45c1144eb649"
+    },
+    {
+      "title": "Introduction to WebAssembly",
+      "body": "A beginner's guide to understanding and using WebAssembly.",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    }
+  ],
+
+  "likes": [
+    {
+      "blogId": "00aff329-18bd-4e13-9edc-b4b905194bbf",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "blogId": "0468cfc0-9236-41e6-b481-698d26374fc1",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "blogId": "386aaef7-3af8-48c3-8aa3-5ff60d89a718",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "blogId": "4c4c4754-9698-407e-8cdc-9a2a25e4f401",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "blogId": "51396924-51ff-4ebe-a016-30b66a37baae",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "blogId": "69990af1-6e6c-4033-b4d0-0576bb5fa39f",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "blogId": "6c50537b-3776-4720-8165-fbd49ae13db3",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "blogId": "757deabb-ba01-45a3-86a3-505426a99617",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "blogId": "78061aae-3a52-4c97-a483-fe472b2ca85e",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "blogId": "86e63fe9-6d1f-476c-9d6a-3b4c6d8e5060",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "blogId": "8f207b78-833f-4287-8035-8820edba8303",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "blogId": "97c95b5e-b235-4e6a-bd1e-dba1b06c688c",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "blogId": "9c192b41-d504-48d8-8264-45c1144eb649",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    }
+  ],
+  "saves": [
+    {
+      "blogId": "00aff329-18bd-4e13-9edc-b4b905194bbf",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "blogId": "0468cfc0-9236-41e6-b481-698d26374fc1",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "blogId": "386aaef7-3af8-48c3-8aa3-5ff60d89a718",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "blogId": "4c4c4754-9698-407e-8cdc-9a2a25e4f401",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "blogId": "51396924-51ff-4ebe-a016-30b66a37baae",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "blogId": "69990af1-6e6c-4033-b4d0-0576bb5fa39f",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    }
+  ],
+  "comments": [
+    {
+      "title": "Great blog!",
+      "blogId": "00aff329-18bd-4e13-9edc-b4b905194bbf",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "title": "Very informative.",
+      "blogId": "0468cfc0-9236-41e6-b481-698d26374fc1",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "title": "I learned a lot.",
+      "blogId": "386aaef7-3af8-48c3-8aa3-5ff60d89a718",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "title": "Excellent read!",
+      "blogId": "4c4c4754-9698-407e-8cdc-9a2a25e4f401",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "title": "Can't wait for the next one!",
+      "blogId": "51396924-51ff-4ebe-a016-30b66a37baae",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "title": "This was very helpful.",
+      "blogId": "69990af1-6e6c-4033-b4d0-0576bb5fa39f",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "title": "I appreciate the insights.",
+      "blogId": "6c50537b-3776-4720-8165-fbd49ae13db3",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "title": "Very well written!",
+      "blogId": "757deabb-ba01-45a3-86a3-505426a99617",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "title": "Loved the examples!",
+      "blogId": "78061aae-3a52-4c97-a483-fe472b2ca85e",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "title": "This is my new favorite blog.",
+      "blogId": "86e63fe9-6d1f-476c-9d6a-3b4c6d8e5060",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "title": "Fantastic article!",
+      "blogId": "8f207b78-833f-4287-8035-8820edba8303",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    },
+    {
+      "title": "So helpful, thanks!",
+      "blogId": "97c95b5e-b235-4e6a-bd1e-dba1b06c688c",
+      "userId": "99ad4a55-2fe8-4fd1-b311-a6009978fc98"
+    },
+    {
+      "title": "I will share this!",
+      "blogId": "9c192b41-d504-48d8-8264-45c1144eb649",
+      "userId": "88f51be3-2410-4d69-9681-6b5cd466bd44"
+    }
+  ]
+}
